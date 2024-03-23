@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RogueLike_Remake.GameObject.Structs;
 
-namespace RogueLike_Remake.GameObject.DinamicObject
+namespace RogueLike_Remake.GameObject.AliveObject
 {
-    internal interface IAliveObject : IGameObject, IDrawable
+    internal interface IAliveObject : IGameObject
     {
-        bool IsAlive { get; }
+        public bool _IsAlive { get; }
         public void Move(Direction direction);
         public void Attack(IGameObject gameObject);
         public void Damaged(int value);

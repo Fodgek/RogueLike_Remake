@@ -1,6 +1,8 @@
-﻿namespace RogueLike_Remake.GameObject
+﻿using RogueLike_Remake.GameObject.Structs;
+
+namespace RogueLike_Remake.GameObject.StaticObject
 {
-    internal interface IStaticObject : IGameObject , IDrawable
+    internal interface IStaticObject : IGameObject 
     {
 
     }

@@ -1,6 +1,6 @@
-﻿namespace RogueLike_Remake.GameObject
+﻿namespace RogueLike_Remake.GameObject.Structs
 {
-    internal struct Sprite
+    public struct Sprite
     {
         public char _symbol { get; private set; }
         public Sprite() => _symbol = '_';

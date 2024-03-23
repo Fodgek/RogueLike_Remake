@@ -1,10 +1,16 @@
-﻿namespace RogueLike_Remake.GameScene.Map
+﻿using RogueLike_Remake.GameObject;
+
+namespace RogueLike_Remake.GameScene.Map
 {
     internal interface IRoom
     {
-        public int _roomId { get; set; }
-        public int _width { get; set; }
-        public int _height { get; set; }
-
+        Guid Id { get; }
+        public int _width { get; }
+        public int _height { get; }
+        public List<IGameObject> _gameObjects {  get; }
+        public void Add(IGameObject obj);
+        public bool Del(Guid id);
+        public IGameObject? FindById(Guid id);
+        public void Clr();
     }
 }

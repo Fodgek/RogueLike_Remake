@@ -1,5 +1,4 @@
-﻿namespace RogueLike_Remake.GameObject
-
+﻿namespace RogueLike_Remake.GameObject.Structs
 {
     public struct Health
     {
