@@ -1,4 +1,6 @@
-﻿using RogueLike_Remake.GameObject.Structs;
+﻿using RogueLike_Remake.GameObject.AddedObject.Bullet;
+using RogueLike_Remake.GameObject.AliveObject;
+using RogueLike_Remake.GameObject.Structs;
 
 namespace RogueLike_Remake.GameObject.StaticObject
 {
@@ -7,20 +9,23 @@ namespace RogueLike_Remake.GameObject.StaticObject
         public Guid Id { get; }
         public string _Name {  get; } = "StaticObject";
         public string _Description { get; } = "Статичный Объект. Я его бью бью, а он никак не умирает";
-        public string _Tag { get; } = "None";
+        public string _Tag { get; } = "StaticObject";
+        public bool _IsPasable {  get; }
         public Sprite _Sprite { get; }
         public Position _Position { get; set; }
         public Health _Health {  get; }
+        public bool _OnDel { get; private set; }
 
-        public StaticObject(string name, string description, string tag, Sprite sprite, Position position, Health health)
+        public StaticObject(string name, string description, bool ispasable, Sprite sprite, Position position, Health health)
         {
             Id = Guid.NewGuid();
             _Name = name;
             _Description = description;
-            _Tag = tag;
+            _IsPasable = ispasable;
             _Sprite = sprite;
             _Position = position;
             _Health = health;
+            _OnDel = false;
         }
         public void Info()
         {
@@ -32,11 +37,13 @@ namespace RogueLike_Remake.GameObject.StaticObject
         }
         public IGameObject ChPosClone(Position pos)
         {
-            return new StaticObject(_Name, _Description, _Tag, _Sprite, pos, _Health);
+            return new StaticObject(_Name, _Description, _IsPasable, _Sprite, pos, _Health);
         }
-        public void DrawMe()
+        public void SetPos(Position pos) => _Position = pos;
+        public void Damaged(int value)
         {
-            Console.Write("{0,2}",_Sprite._symbol);
+            _Health.ChangeHealth(value);
         }
+        public void DelMe() => _OnDel = true;
     }
 }

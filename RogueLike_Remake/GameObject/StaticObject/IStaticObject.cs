@@ -4,6 +4,6 @@ namespace RogueLike_Remake.GameObject.StaticObject
 {
     internal interface IStaticObject : IGameObject 
     {
-
+        public Health _Health { get; }
     }
 }

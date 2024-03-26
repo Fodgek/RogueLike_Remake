@@ -7,20 +7,24 @@ namespace RogueLike_Remake.Renderer
     internal class Renderer : IRenderer
     {
         private readonly IRoom _Room;
+        private char[,] currentBuffer;
         public Renderer(IRoom room)
         {
             _Room = room;
+            currentBuffer = new char[_Room._width, _Room._height];
         }
         public void RenderFrame() 
         {
-            foreach (var obj in _Room._gameObjects) 
+            foreach (var obj in _Room._gameObjects)
+                currentBuffer[obj._Position._X, obj._Position._Y] = obj._Sprite._symbol;
+
+            for (int Y = 0; Y < _Room._width; Y++)
             {
-                if (obj._Position._Y == _Room._height - 1)
+                for (int X = 0; X < _Room._height; X++)
                 {
-                    obj.DrawMe();
-                    Console.WriteLine();
+                    Console.Write("{0,2}", currentBuffer[X, Y]);
                 }
-                else obj.DrawMe();
+                Console.WriteLine();
             }
             Console.CursorVisible = false;
         }

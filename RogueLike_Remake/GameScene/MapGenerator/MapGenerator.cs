@@ -1,4 +1,4 @@
-﻿namespace RogueLike_Remake.MapGenerator
+﻿namespace RogueLike_Remake.GameScene.MapGenerator
 {
     internal class MapGenerator : IMapGenerator
     {

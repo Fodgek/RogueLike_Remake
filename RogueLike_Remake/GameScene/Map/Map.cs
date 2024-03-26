@@ -3,12 +3,10 @@
     internal class Map : IMap
     {
         public Guid Id { get; }
-
-        public string _Name { get; } = string.Empty;
-
+        public string _Name { get; }
         public int _RoomCount { get; }
-
         public List<IRoom> _Rooms { get; } = new List<IRoom>();
+
         public void Add(IRoom obj) => _Rooms.Add(obj);
         public bool Del(Guid id)
         {

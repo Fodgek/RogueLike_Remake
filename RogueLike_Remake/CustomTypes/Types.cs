@@ -11,8 +11,7 @@
         Up,
         Down,
         Left,
-        Right,
-        None
+        Right
     }
     public enum Size 
     {
@@ -20,5 +19,10 @@
         Medium,
         Big,
         Random
+    }
+    public enum WeaponType
+    {
+        Near,
+        Range
     }
 }
