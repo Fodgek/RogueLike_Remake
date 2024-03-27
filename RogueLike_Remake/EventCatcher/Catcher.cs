@@ -102,6 +102,7 @@ namespace RogueLike_Remake.EventCatcher
                 {
                     ChRoom((IRoomTriger)trigerobj);
                     obj.SetPos(GetReversBorder(NextPos));
+                    _nowRoom.Add(obj);
                     _nowRoom.Info();
                 }
         }
