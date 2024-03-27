@@ -11,6 +11,7 @@ using RogueLike_Remake.GameController;
 using RogueLike_Remake.GameObject;
 using RogueLike_Remake.WeaponFactory;
 using RogueLike_Remake.EventCatcher;
+using RogueLike_Remake.GameLoop;
 
 /*Console.Clear();
 Console.SetCursorPosition(0, 0);
@@ -25,7 +26,7 @@ aliveObject.Move(Direction.Down);
 aliveObject.DrawMe();*/
 
 
-IGameConfig gameConfig = new GameConfig();
+/*IGameConfig gameConfig = new GameConfig();
 IProtoFactory protoFactory = new ProtoFactory();
 IWeaponFactory weaponFactory = new RogueLike_Remake.WeaponFactory.WeaponFactory();
 IRoomGenerator roomGenerator = new RoomGenerator(gameConfig,protoFactory);
@@ -33,7 +34,7 @@ IRoom Room = roomGenerator.GenerateRoom();
 IMap Map = new Map("Map1", 4);
 
 IGameController controller = new GameController();
-IAliveObject player = new AliveObject("Игрок", "Текущий игрок", false, new Sprite('&'), new Position(3, 3), new Health(10), weaponFactory.Create("Sword"));
+IAliveObject player = new AliveObject("Игрок", "Текущий игрок", false, new Sprite('&'), new Position(3, 3), new Health(10), weaponFactory.Create("Bow"));
 Room.Add(player);
 ICatcher catcher = new Catcher(Room, Map, roomGenerator);
 IRenderer renderer = new Renderer(Map, Room, player.Id);
@@ -47,5 +48,8 @@ while (work)
     renderer.ClearFrame();
     player.LowInfo();
     //Room.FindByPos(new Position(3, 0), "StaticObject")?.LowInfo();
-}
+}*/
+
+IGameLoop gameLoop = new GameLoop();
+gameLoop.Start();
 

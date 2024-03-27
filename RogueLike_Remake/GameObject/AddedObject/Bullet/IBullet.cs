@@ -9,6 +9,7 @@ namespace RogueLike_Remake.GameObject.AddedObject.Bullet
         public event Action<Bullet>? DelBullet;
         public event Action<Bullet>? Moving;
 
+        public void SubOn();
         public void Destroy();
     }
 }

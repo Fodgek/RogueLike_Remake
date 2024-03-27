@@ -10,7 +10,7 @@
         {
             _Name = "Configuration0";
             _PlayerName = "Player1";
-            _RoomSize = Size.Small;
+            _RoomSize = Size.Big;
             _Difficult = Difficult.Easy;
         }
         public GameConfig(string name,string player, Size roomSize, Difficult difficult)

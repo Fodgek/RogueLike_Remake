@@ -1,5 +1,7 @@
-﻿using RogueLike_Remake.GameObject.AliveObject;
+﻿using RogueLike_Remake.GameLoop;
+using RogueLike_Remake.GameObject.AliveObject;
 using RogueLike_Remake.GameObject.Structs;
+using RogueLike_Remake.Renderer;
 using System.Xml.Linq;
 
 namespace RogueLike_Remake.GameObject.AddedObject.Bullet
@@ -18,7 +20,10 @@ namespace RogueLike_Remake.GameObject.AddedObject.Bullet
 
         public event Action<Bullet>? DelBullet;
         public event Action<Bullet>? Moving;
-
+        public void SubOn()
+        {
+            GameLoop.GameLoop.Updated += StartMoving;
+        }
         public Bullet(Position pos, int damage)
         {
             Id = Guid.NewGuid();
@@ -27,6 +32,7 @@ namespace RogueLike_Remake.GameObject.AddedObject.Bullet
             _Position = pos;
             _Damage = damage;
             _OnDel = false;
+            SubOn();
         }
         public Bullet(string name, string description, string tag, Sprite sprite, Position position, int damage)
         {
@@ -39,6 +45,7 @@ namespace RogueLike_Remake.GameObject.AddedObject.Bullet
             _Position = position;
             _Damage = damage;
             _OnDel = false;
+            SubOn();
         }
         public void Info()
         {
@@ -59,7 +66,7 @@ namespace RogueLike_Remake.GameObject.AddedObject.Bullet
         }
         public void DelMe() => _OnDel = true;
 
-        private void  StartMoving()
+        private void  StartMoving(bool mov)
         {
             Moving?.Invoke(this);
         }

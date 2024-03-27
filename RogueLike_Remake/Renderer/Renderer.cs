@@ -10,6 +10,7 @@ namespace RogueLike_Remake.Renderer
         private IRoom _Room;
         private readonly Guid _PlayerId;
         private char[,] currentBuffer;
+
         public Renderer(IMap map, IRoom room,  Guid playerId)
         {
             _Map = map;

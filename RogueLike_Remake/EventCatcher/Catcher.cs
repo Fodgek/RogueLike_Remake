@@ -10,6 +10,7 @@ using RogueLike_Remake.GameObject.AliveObject;
 using RogueLike_Remake.GameObject.AddedObject.Bullet;
 using RogueLike_Remake.GameObject.AddedObject.RoomTriger;
 using RogueLike_Remake.GameScene.RoomGenerator;
+using RogueLike_Remake.GameLoop;
 
 namespace RogueLike_Remake.EventCatcher
 {
@@ -157,37 +158,31 @@ namespace RogueLike_Remake.EventCatcher
             Position NextPos = bullet._Position.ChangePos(bullet._Position._Direction);
             IGameObject? staticobj = _nowRoom.FindByPos(NextPos, "StaticObject");
             IGameObject? aliveobj = _nowRoom.FindByPos(NextPos, "AliveObject");
-            if (staticobj != null && aliveobj != null)
-            {
-                if (staticobj._IsPasable)
-                {
+            IGameObject? trigerobj = _nowRoom.FindByPos(NextPos, "Triger");
+            if (staticobj != null && aliveobj != null && trigerobj != null)
+                if (staticobj._IsPasable && aliveobj._IsPasable && trigerobj._IsPasable)
                     bullet.SetPos(NextPos);
-                }
-                else
+                else 
                 {
                     ((IAliveObject)aliveobj).Damaged(bullet._Damage);
                     bullet.Destroy();
                 }
-            }
             else
-            {
-                if (staticobj != null)
-                {
-                    if (staticobj._IsPasable)
-                    {
-                        bullet.SetPos(NextPos);
-                    }
-                    else
-                    {
-                        bullet.Destroy();
-                    }
-                }
-                else if (aliveobj != null)
+                if (aliveobj != null)
                 {
                     ((IAliveObject)aliveobj).Damaged(bullet._Damage);
-                    bullet.Destroy();
+                    _nowRoom.DelById(bullet.Id);
                 }
-            }
+                else if (staticobj != null && staticobj._IsPasable)
+                    bullet.SetPos(NextPos);
+                else if (staticobj != null && !staticobj._IsPasable)
+                    _nowRoom.DelById(bullet.Id);
+                else if (trigerobj != null && trigerobj._IsPasable)
+                {
+                    ChRoom((IRoomTriger)trigerobj);
+                    bullet.SetPos(GetReversBorder(NextPos));
+                    _nowRoom.Info();
+                }
         }
     }
 }
