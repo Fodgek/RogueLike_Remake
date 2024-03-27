@@ -179,9 +179,7 @@ namespace RogueLike_Remake.EventCatcher
                     _nowRoom.DelById(bullet.Id);
                 else if (trigerobj != null && trigerobj._IsPasable)
                 {
-                    ChRoom((IRoomTriger)trigerobj);
-                    bullet.SetPos(GetReversBorder(NextPos));
-                    _nowRoom.Info();
+                    _nowRoom.DelById(bullet.Id);
                 }
         }
     }
