@@ -33,10 +33,10 @@ IRoom Room = roomGenerator.GenerateRoom();
 IMap Map = new Map("Map1", 4);
 
 IGameController controller = new GameController();
-IAliveObject player = new AliveObject("Игрок", "Текущий игрок", false, new Sprite('&'), new Position(3, 3), new Health(10), weaponFactory.Create("Bow"));
+IAliveObject player = new AliveObject("Игрок", "Текущий игрок", false, new Sprite('&'), new Position(3, 3), new Health(10), weaponFactory.Create("Sword"));
 Room.Add(player);
-IRenderer renderer = new Renderer(Room);
 ICatcher catcher = new Catcher(Room, Map, roomGenerator);
+IRenderer renderer = new Renderer(Map, Room, player.Id);
 //renderer.RenderFrame();
 bool work = true;
 Console.WriteLine(7 % 2);
@@ -44,7 +44,7 @@ while (work)
 {
     renderer.RenderFrame();
     controller.Control(player);
-    //renderer.ClearFrame();
+    renderer.ClearFrame();
     player.LowInfo();
     //Room.FindByPos(new Position(3, 0), "StaticObject")?.LowInfo();
 }

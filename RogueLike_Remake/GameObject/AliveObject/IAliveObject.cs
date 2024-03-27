@@ -14,5 +14,6 @@ namespace RogueLike_Remake.GameObject.AliveObject
         public event Action<IAliveObject>? Dead;
         public void Move(Direction direction);
         public void Attack();
+        public void Damaged(int value);
     }
 }

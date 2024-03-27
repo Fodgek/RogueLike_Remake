@@ -106,16 +106,17 @@ namespace RogueLike_Remake.EventCatcher
         }
         private void ChRoom(IRoomTriger triger) 
         {
-            IRoom newRoom = _roomGenerator.GenerateRoom();
-            triger.SetNextRoomId(newRoom.Id);
-            IRoomTriger? newtriger = (IRoomTriger?)newRoom.FindByPos(GetReversBorder(triger._Position),"Triger");
-            newtriger?.SetNextRoomId(_nowRoom.Id);
-            newtriger?.SetPrevRoomId(newRoom.Id);
             IRoom? temproom = _nowMap.FindById(triger._NextRoomId);
             if (temproom != null)
+            {
                 _nowRoom = temproom;
+            }
             else
             {
+                IRoom newRoom = _roomGenerator.GenerateRoom();
+                triger.SetNextRoomId(newRoom.Id);
+                IRoomTriger? newtriger = (IRoomTriger?)newRoom.FindByPos(GetReversBorder(triger._Position), "Triger");
+                newtriger?.SetNextRoomId(_nowRoom.Id);
                 _nowMap.Add(newRoom);
                 _nowRoom = newRoom;
             }
@@ -141,7 +142,7 @@ namespace RogueLike_Remake.EventCatcher
             {
                 Position[] NextPos = attaker._Position.GetPosArrFromDirect(attaker._Position._Direction, maxdistance);
                 foreach (Position pos in NextPos)
-                    _nowRoom.FindByPos(pos, "AliveObject")?.Damaged(damage);
+                    ((IAliveObject?)_nowRoom.FindByPos(pos, "AliveObject"))?.Damaged(damage);
             }
             else if (type == WeaponType.Range)
             {
@@ -164,7 +165,7 @@ namespace RogueLike_Remake.EventCatcher
                 }
                 else
                 {
-                    aliveobj.Damaged(bullet._Damage);
+                    ((IAliveObject)aliveobj).Damaged(bullet._Damage);
                     bullet.Destroy();
                 }
             }
@@ -183,7 +184,7 @@ namespace RogueLike_Remake.EventCatcher
                 }
                 else if (aliveobj != null)
                 {
-                    aliveobj.Damaged(bullet._Damage);
+                    ((IAliveObject)aliveobj).Damaged(bullet._Damage);
                     bullet.Destroy();
                 }
             }

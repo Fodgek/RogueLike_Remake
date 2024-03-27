@@ -19,7 +19,6 @@ namespace RogueLike_Remake.GameObject
         public void LowInfo();
         public IGameObject ChPosClone(Position pos);
         public void SetPos(Position pos);
-        public void Damaged(int value);
         public void DelMe();
     }
 }
